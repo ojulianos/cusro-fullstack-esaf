@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercício 07</title>
+</head>
+<body>
+    
+    <form action="https://httpbin.org/post" method="post">
+        <fieldset>
+            <legend>Meu Formulário</legend>
+
+            <div>
+                <label for="nome">nome</label>
+                <input type="text" name="nome" id="nome" placeholder="Digite seu nome">
+            </div>
+            <div>
+                <label for="idade">idade</label>
+                <input type="number" name="idade" id="idade" placeholder="Digite sua idade">
+            </div>
+            <div>
+                <label for="telefone">telefone</label>
+                <input type="tel" name="telefone" id="telefone" placeholder="Digite seu telefone">
+            </div>
+            <div>
+                <label for="estado">estado</label>
+                <select name="estado" id="estado">
+                    <option value="RS">RS</option>
+                    <option value="SC">SC</option>
+                    <option value="SP">SP</option>
+                    <option value="PR">PR</option>
+                </select>
+            </div>
+            <div>
+                <label for="observacoes">observações</label>
+                <textarea name="observacoes" id="observacoes" placeholder="Digite as observações"></textarea>
+            </div>
+            <div>
+                <button type="submit">Enviar</button>
+                <button type="reset">Limpar</button>
+            </div>
+        </fieldset>
+    </form>
+
+</body>
+</html>

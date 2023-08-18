@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulários</title>
+</head>
+<body>
+    
+        <form action="https://postman-echo.com/post" method="post">
+
+            <fieldset>
+                <legend>Dados Pessoais:</legend>
+
+                <div>
+                    <label for="nome">Nome</label>
+                    <input type="text" name="nome" id="nome" placeholder="Digite seu nome">
+                </div>
+
+                <div>
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" placeholder="Digite seu email" autocomplete="Off">
+                </div>
+
+                <div>
+                    <h4>Tipo de Pessoa</h4>
+                    <div>
+                        <input type="radio" id="pf" name="tipo_de_pessoa" value="F" required />
+                        <label for="pf">Física</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="pj" name="tipo_de_pessoa" value="J" required />
+                        <label for="pj">Jurídica</label>
+                    </div>
+                </div>
+
+                <div>
+                    <h4>Estado</h4>
+                    <div>
+                        <input type="checkbox" id="e_novo" name="estado_atual" value="N" />
+                        <label for="e_novo">Novo</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="e_usado" name="estado_atual" value="U" />
+                        <label for="e_usado">Usado</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="e_seminovo" name="estado_atual" value="S" />
+                        <label for="e_seminovo">Semi-novo</label>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="uf">UF</label>
+                    <select name="uf" id="uf">
+                        <option value="SC">SC</option>
+                        <option value="RS">RS</option>
+                        <option value="SP">SP</option>
+                        <option value="PR">PR</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="obs">Observação</label><br>
+                    <textarea name="texto" id="obs" cols="50" rows="6"></textarea>
+                </div>
+
+                <!-- div>
+                    <input type="date">
+                    <input type="time">
+                    <input type="number">
+                    <input type="color">
+                    <input type="password">
+                    <input type="tel">
+                </div -->
+            </fieldset>
+
+
+            <button type="submit">Enviar</button>
+            <button type="reset">Limpar</button>
+        </form>
+
+</body>
+</html>

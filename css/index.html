@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemmplos CSS</title>
+    <link rel="stylesheet" href="estilo.css">
+</head>
+
+<body>
+
+    <div id="container">
+        <header>
+            <h1>Nome do Site</h1>
+            <div>
+                <a href="#">Sair</a>
+            </div>
+        </header>
+
+        <section id="content">
+
+            <section id="sidebar">
+                <ul>
+                    <li>
+                        <a href="">Menu 1</a>
+                    </li>
+                    <li>
+                        <a href="">Menu 2</a>
+                    </li>
+                    <li>
+                        <a href="">Menu 3</a>
+                    </li>
+                    <li>
+                        <a href="">Menu 4</a>
+                    </li>
+                    <li>
+                        <a href="">Menu 5</a>
+                    </li>
+                </ul>
+            </section>
+
+            <section id="page">
+
+                <h3>Enredo</h3>
+
+                <p class="red">
+                    As várias versões seguem praticamente o mesmo enredo básico. Contudo, uma vez que Adams reescreveu a
+                    história substancialmente para cada nova adaptação, os personagens muitas vezes estão em lugares
+                    mutuamente contraditórios.
+                </p>
+
+                <p class="green">
+                    Robô de bordo da espaçonave Coração de Ouro, Marvin é um dos protótipos da Companhia Cibernética
+                    Sírius projetados com a revolucionária tecnologia de Personalidade Humana Genuína (PHG). A PHG
+                    proporciona a esses protótipos as reações e emoções humanas mais variadas.
+                </p>
+
+                <h3>Personagens</h3>
+
+                <ul>
+                    <li>
+                        <a href="https://pt.wikipedia.org/wiki/The_Hitchhiker%27s_Guide_to_the_Galaxy#Arthur_Dent">
+                            <h4>Arthur Dent</h4>
+                        </a>
+                        <span>Arthur Dent é um terráqueo, humanóide, proveniente da Inglaterra. </span>
+                    </li>
+                    <li>
+                        <a href="https://pt.wikipedia.org/wiki/The_Hitchhiker%27s_Guide_to_the_Galaxy#Ford_Prefect">
+                            <h4>Ford Prefect</h4>
+                        </a>
+                        <span>Ford Prefect é um alienígena de um planeta próximo a Betelgeuse que veio fazer uma visita
+                            de alguns dias à Terra.</span>
+                    </li>
+                    <li>
+                        <a href="https://pt.wikipedia.org/wiki/The_Hitchhiker%27s_Guide_to_the_Galaxy#Trillian">
+                            <h4>Trillian</h4>
+                        </a>
+                        <span>No filme, Arthur Dent conhece Trillian durante uma festa em Islington (Inglaterra) e tenta
+                            paquerar a moça, sem sucesso.</span>
+                    </li>
+                </ul>
+
+                <hr>
+
+
+                <form method="post" action="https://postman-echo.com/post">
+                    <fieldset>
+                        <legend>Meu Formulário</legend>
+                        <div>
+                            <label for="nome">Seu nome:</label>
+                            <input id="nome" name="nome" placeholder="Informe o seu nome" required="required">
+                        </div>
+                        <div>
+                            <label for="email">Seu e-mail:</label>
+                            <input type="email" id="email" name="email" placeholder="Informe o seu e-mail"
+                                required="required">
+                        </div>
+                        <div>
+                            <label for="estado">Seu estado:</label>
+                            <select id="estado" name="estado" required="required">
+                                <option value="">Selecione um Estado</option>
+                                <option value="SC">Santa Catarina</option>
+                                <option value="RS">Rio Grande do Sul</option>
+                                <option value="PR">Paraná</option>
+                            </select>
+                        </div>
+                        <div>
+                            <h3>Deseja receber informações?</h3>
+                            <div class="input-radio">
+                                <input type="radio" id="info-sim" name="info" value="sim" required />
+                                <label for="info-sim">Sim</label>
+                            </div>
+                            <div class="input-radio">
+                                <input type="radio" id="info-nao" name="info" value="nao" required />
+                                <label for="info-nao">Não</label>
+                            </div>
+                        </div>
+
+                        <div class="row-button">
+                            <button type="submit">Enviar</button>
+                            <button type="reset">Limpar</button>
+                        </div>
+                    </fieldset>
+                </form>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>E-mail</th>
+                            <th>CPF</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>João Silva</td>
+                            <td>joao@example.com</td>
+                            <td>123.456.789-01</td>
+                        </tr>
+                        <tr>
+                            <td>Maria Souza</td>
+                            <td>maria@example.com</td>
+                            <td>987.654.321-09</td>
+                        </tr>
+                        <tr>
+                            <td>Carlos Santos</td>
+                            <td>carlos@example.com</td>
+                            <td>456.789.123-45</td>
+                        </tr>
+                        <tr>
+                            <td>Ana Oliveira</td>
+                            <td>ana@example.com</td>
+                            <td>789.123.456-78</td>
+                        </tr>
+                        <tr>
+                            <td>Pedro Rocha</td>
+                            <td>pedro@example.com</td>
+                            <td>567.890.123-40</td>
+                        </tr>
+                        <tr>
+                            <td>Laura Ferreira</td>
+                            <td>laura@example.com</td>
+                            <td>234.567.890-67</td>
+                        </tr>
+                        <tr>
+                            <td>Gustavo Alves</td>
+                            <td>gustavo@example.com</td>
+                            <td>901.234.567-89</td>
+                        </tr>
+                        <tr>
+                            <td>Sofia Lima</td>
+                            <td>sofia@example.com</td>
+                            <td>345.678.901-23</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </section>
+
+        </section>
+    </div>
+
+</body>
+
+</html>

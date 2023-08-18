@@ -1,0 +1,124 @@
+body {
+    font-family: sans-serif;
+    font-size: 16px;
+    background-color: black;
+    color: white;  
+  }
+  
+  #page {
+    max-width: 720px;
+    min-width: 360px;
+    margin: 0 auto;
+  }
+  
+  header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;  
+    padding: 12px 16px;
+    background-color: #C0C0C0;
+  }
+  header h1 {
+    font-size: 28px;
+    color: red;
+    margin: 0;
+    padding: 0;
+  }
+  header a {
+    font-weight: bold;
+    color: black;
+    text-decoration: none;
+  }
+  header a:hover {
+    color: red;
+  }
+  
+  p {
+    background-color: green;
+    margin: 20px 16px;
+    padding: 16px 26px;
+    border-radius: 12px;
+  }
+  
+  .vermelhinho {
+    background-color: red;
+  }
+  
+  .gigante {
+    font-size: 24px;
+  }
+  
+  form {
+    background-color: gray;
+    border: 2px solid red;
+    padding: 16px;
+    margin-bottom: 32px;
+  }
+  
+  form div label {
+    display: block;
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: 4px;
+  }
+  
+  form div {
+    margin-bottom: 16px;
+  }
+  
+  form div input,
+  form div select {
+    border: 1px solid black;
+    border-radius: 8px;
+    font-size: 18px;
+    padding: 7px 12px;
+    outline: 0;
+  }
+  
+  form div input:focus {
+    border-color: red;
+  }
+  
+  form h3 {
+    font-size: 18px;
+    margin-bottom: 12px;
+  }
+  
+  form .input-radio {
+    margin-bottom: 7px;
+  }
+  form .input-radio label {
+    display: inline;
+  }
+  
+  form button {
+    border: 0;
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-weight: bold;
+    font-size: 18px;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    transition: all 0.25s;
+  }
+  
+  form button[type=reset] {
+    background-color: blue;
+    font-weight: normal;
+    font-size: 14px;
+  }
+  
+  form button:hover {
+    background-color: red;
+    font-size: 24px;
+  }
+  
+  form .row-button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }

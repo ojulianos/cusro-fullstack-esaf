@@ -5,14 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exemmplos CSS</title>
-    <link rel="stylesheet" href="estilo.css">
+    <link rel="stylesheet" href="painel.css">
 </head>
 
 <body>
 
     <div id="container">
         <header id="header">
-            <h1>Nome do Site</h1>
+            <h1>
+                <img src="./logo.png" alt="Sistema AI">
+                Sistema AI
+            </h1>
             <div>
                 <a href="#">Sair</a>
             </div>
@@ -42,6 +45,10 @@
 
             <section id="page">
 
+                <div class="slides">
+                    <img src="https://loremflickr.com/900/200" alt="Imagem em destaque">
+                </div>
+
                 <h3>Enredo</h3>
 
                 <p class="red">
@@ -64,22 +71,25 @@
 
                 <h3>Personagens</h3>
 
-                <ul>
+                <ul class="personagens">
                     <li>
-                        <a href="https://pt.wikipedia.org/wiki/The_Hitchhiker%27s_Guide_to_the_Galaxy#Arthur_Dent">
+                        <a href="https://pt.wikipedia.org/wiki/The_Hitchhiker%27s_Guide_to_the_Galaxy#Arthur_Dent" target="_blank">
+                            <img src="https://pm1.aminoapps.com/6362/ff421368404327ada2b654234ea9b919fede383e_hq.jpg" class="arthur" alt="Arthur Dent">
                             <h4>Arthur Dent</h4>
                         </a>
                         <span>Arthur Dent é um terráqueo, humanóide, proveniente da Inglaterra. </span>
                     </li>
                     <li>
-                        <a href="https://pt.wikipedia.org/wiki/The_Hitchhiker%27s_Guide_to_the_Galaxy#Ford_Prefect">
+                        <a href="https://pt.wikipedia.org/wiki/The_Hitchhiker%27s_Guide_to_the_Galaxy#Ford_Prefect" target="_blank">
+                            <img src="https://images.uncyc.org/pt/5/50/FordPrefect.jpeg" class="ford" alt="Ford Prefect">
                             <h4>Ford Prefect</h4>
                         </a>
                         <span>Ford Prefect é um alienígena de um planeta próximo a Betelgeuse que veio fazer uma visita
                             de alguns dias à Terra.</span>
                     </li>
                     <li>
-                        <a href="https://pt.wikipedia.org/wiki/The_Hitchhiker%27s_Guide_to_the_Galaxy#Trillian">
+                        <a href="https://pt.wikipedia.org/wiki/The_Hitchhiker%27s_Guide_to_the_Galaxy#Trillian" target="_blank">
+                            <img src="https://i.pinimg.com/originals/bf/4e/4e/bf4e4e050bbcdc7771a9f35defcdb687.jpg" class="trillian" alt="Trillian">
                             <h4>Trillian</h4>
                         </a>
                         <span>No filme, Arthur Dent conhece Trillian durante uma festa em Islington (Inglaterra) e tenta
@@ -87,55 +97,16 @@
                     </li>
                 </ul>
 
+                <br>
                 <hr>
-
-
-                <form method="post" action="https://postman-echo.com/post">
-                    <fieldset>
-                        <legend>Meu Formulário</legend>
-                        <div>
-                            <label for="nome">Seu nome:</label>
-                            <input id="nome" name="nome" placeholder="Informe o seu nome" required="required">
-                        </div>
-                        <div>
-                            <label for="email">Seu e-mail:</label>
-                            <input type="email" id="email" name="email" placeholder="Informe o seu e-mail"
-                                required="required">
-                        </div>
-                        <div>
-                            <label for="estado">Seu estado:</label>
-                            <select id="estado" name="estado" required="required">
-                                <option value="">Selecione um Estado</option>
-                                <option value="SC">Santa Catarina</option>
-                                <option value="RS">Rio Grande do Sul</option>
-                                <option value="PR">Paraná</option>
-                            </select>
-                        </div>
-                        <div>
-                            <h3>Deseja receber informações?</h3>
-                            <div class="input-radio">
-                                <input type="radio" id="info-sim" name="info" value="sim" required />
-                                <label for="info-sim">Sim</label>
-                            </div>
-                            <div class="input-radio">
-                                <input type="radio" id="info-nao" name="info" value="nao" required />
-                                <label for="info-nao">Não</label>
-                            </div>
-                        </div>
-
-                        <div class="row-button">
-                            <button type="submit">Enviar</button>
-                            <button type="reset">Limpar</button>
-                        </div>
-                    </fieldset>
-                </form>
+                <br>
 
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Nome</th>
-                            <th>E-mail</th>
-                            <th>CPF</th>
+                            <th width="50%">Nome</th>
+                            <th width="25%">E-mail</th>
+                            <th width="25%">CPF</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -181,6 +152,52 @@
                         </tr>
                     </tbody>
                 </table>
+
+                <br>
+                <hr>
+                <br>
+
+                <form method="post" action="https://postman-echo.com/post">
+                    <fieldset>
+                        <legend>Meu Formulário</legend>
+                        <div>
+                            <label for="nome">Seu nome:</label>
+                            <input id="nome" name="nome" placeholder="Informe o seu nome" required="required">
+                        </div>
+                        <div>
+                            <label for="email">Seu e-mail:</label>
+                            <input type="email" id="email" name="email" placeholder="Informe o seu e-mail"
+                                required="required">
+                        </div>
+                        <div>
+                            <label for="estado">Seu estado:</label>
+                            <select id="estado" name="estado" required="required">
+                                <option value="">Selecione um Estado</option>
+                                <option value="SC">Santa Catarina</option>
+                                <option value="RS">Rio Grande do Sul</option>
+                                <option value="PR">Paraná</option>
+                            </select>
+                        </div>
+                        <div>
+                            <h3>Deseja receber informações?</h3>
+                            <div class="input-radio">
+                                <input type="radio" id="info-sim" name="info" value="sim" required />
+                                <label for="info-sim">Sim</label>
+                            </div>
+                            <div class="input-radio">
+                                <input type="radio" id="info-nao" name="info" value="nao" required />
+                                <label for="info-nao">Não</label>
+                            </div>
+                        </div>
+
+                        <div class="row-button">
+                            <button type="submit">Enviar</button>
+                            <button type="reset">Limpar</button>
+                        </div>
+                    </fieldset>
+                </form>
+
+                
 
             </section>
 

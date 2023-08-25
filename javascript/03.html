@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript 03</title>
+</head>
+<body>
+
+    <button id="botao1">Clique Me</button>
+
+    <div class="texto"></div>
+    <div class="texto"></div>
+    <div class="texto"></div>
+    <div class="texto"></div>
+
+    <script>
+        let botao = document.getElementById('botao1')
+
+        botao.addEventListener("click", function(){
+            let textos = document.getElementsByClassName('texto');
+
+            for (let i = 0; i <= textos.length; i++) {
+                textos[i].innerHTML = "Novo Texto";
+                // textos[i]. = "Novo Texto";
+            }
+        }); 
+    </script>
+    
+</body>
+</html>

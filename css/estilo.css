@@ -20,7 +20,6 @@ body {
     width: 100%;
     position: fixed;
     padding: 10px;
-    display: none;
 }
 
 #container header h1 {
@@ -49,6 +48,10 @@ body {
     width: 250px;
     float: left;
     margin-right: 15px;
+}
+
+table {
+    border: 1px solid #000;
 }
 
 #sidebar ul {

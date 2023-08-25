@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,400;0,700;1,100;1,400;1,700&display=swap');
+
+html, body {
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+    color: #5e5e5e;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+}
+
+.container form {
+    width: 400px;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px -5px rgba(0,0,0,0.8);
+}
+
+.container form .img {
+    width: 100%;
+    text-align: center;
+    margin: 30px 0;
+}
+
+.container h4 {
+    font-weight: normal;
+    font-size: 22px;
+    
+}
+
+.container fieldset {
+    border: none;
+    padding: 0;
+}
+
+.container fieldset div {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.container div label {
+    display: block;
+    text-indent: 10px;
+}
+
+.container div input {
+    border: 1px solid #dfdfdf;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    padding: 10px 8px;
+    font-size: 14px;
+}
+
+.container .buttons {
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.container button {
+    background-color: #f7dd84;
+    border: 1px solid #dfdfdf;
+    border-radius: 10px;
+    padding: 10px 30px;
+    cursor: pointer;
+    transition: all 0.25s;
+}
+
+.container button[type=reset] {
+    background-color: #fff7dd;
+}
+
+.container button:hover {
+    color: #929292;
+}

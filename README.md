@@ -12,7 +12,7 @@ O objetivo desse intensivo é preparar os alunos para trabalhar com aplicações
     - [x] trabalhando com mídias (imagem, áudio e vídeo)
     - [x] entendendo as tabelas
     - [x] exercícios com tabelas
-    - [ ] entendendo formulários
+    - [x] entendendo formulários
     - [ ] entendendo frames
     - [ ] exercícios com formulários
     - ### Referências
@@ -20,27 +20,42 @@ O objetivo desse intensivo é preparar os alunos para trabalhar com aplicações
         - [Introdução ao Html - Mozilla](https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML)
         - [Tags HTML - W3Schools](https://www.w3schools.com/tags/tag_comment.asp)
 - [ ] css
-    - [ ] o que é css
-    - [ ] entendendo os elementos (anatomia do css)
-    - [ ] entendendo os seletores
-    - [ ] formas de uso do css
-    - [ ] atributos de cor
-    - [ ] bordas
-    - [ ] margens e espaçamentos
-    - [ ] tamanho dos elementos
-    - [ ] atributos de textos
-    - [ ] display e float
-    - [ ] mais atributos de textos
-    - [ ] entendendo formulários
-    - [ ] entendendo frames
-    - [ ] exercícios com formulários
+    - [x] o que é css
+    - [x] entendendo os elementos (anatomia do css)
+    - [x] entendendo os seletores
+    - [x] formas de uso do css
+    - [x] atributos de cor
+    - [x] bordas
+    - [x] margens e espaçamentos
+    - [x] tamanho dos elementos
+    - [x] atributos de textos
+    - [x] display e float
+    - [x] mais atributos de textos
+    - [ ] flex
+    - [ ] exercício CSS
     - ### Referências
         - [Básico do CSS - Mozilla](https://developer.mozilla.org/pt-BR/docs/Learn/Getting_started_with_the_web/CSS_basics)
         - [Introdução ao CSS - Mozilla](https://developer.mozilla.org/pt-BR/docs/Learn/CSS/First_steps)
         - [Seletores CSS - W3Schools](https://www.w3schools.com/cssref/css_selectors.php)
-- [ ] javascript
 - [ ] lógica de programação
+- [ ] javascript
+- [ ] preparando embiente
 - [ ] banco de dados (mysql)
 - [ ] php
-
-
+- [ ] PROJETOS PRÁTICOS
+	- [ ] LISTA DE AFAZERES
+		- [ ] CRUD (CADASTRO, ALTERAÇÃO, EXCLUSÃO, LISTAGEM)
+		- [ ] MUDANÇA DE STATUS
+	- [ ] ENQUETE
+		- [ ] CRUD ENQUETE (CADASTRO, ALTERAÇÃO, EXCLUSÃO, LISTAGEM)
+		- [ ] CRUD RESPOSTAS
+            - [ ] - SÓ PODE ALTERAR RESPOSTA QUE NÃO TEM RESPOSTAS DE PESSOAS    
+		- [ ] CADASTRO DA RESPOSTAS PESSOAS
+		- [ ] RELATÓRIO DE ENQUETE MAIS VOTADA
+		- [ ] RELATORIO DE RESPOSTA COM MAIS VOTOS
+		- [ ] GRÁFICO PORCENTUAL
+	- [ ] CONTAS A PAGAR E RECEBER
+	- [ ] SISTEMA DE AUTENTICAÇÃO
+	- [ ] SISTEMA DE RECUPERAR SENHA
+	- [ ] SISTEMA DE CADASTRO DE USUÁRIOS
+	- [ ] SISTEMA DE PERMISSÕES DE USUÁRIOS

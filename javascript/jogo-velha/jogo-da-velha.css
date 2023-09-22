@@ -26,3 +26,11 @@ body {
     font-weight: bolder;
     cursor: pointer;
 }
+
+.venceu {
+    background-color: green;
+}
+
+.velha {
+    color: #feb8b8;
+}

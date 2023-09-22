@@ -50,7 +50,7 @@ for (let i=0; i < tableDataTd.length; i++) {
         }
         
         if (tableDataTd[i].innerText.length <= 0) {
-            const proximoJogador = jogador === 0 ? 'X' : 'O';
+            const proximoJogador = jogador === 1 ? 'O' : 'X';
             jogador = jogador === 0 ? 1 : 0;
             tableDataTd[i].innerText = proximoJogador;
             
@@ -68,7 +68,8 @@ for (let i=0; i < tableDataTd.length; i++) {
                 }
             }
 
-            message.innerHTML = `Vez do jogador ${proximoJogador}`;
+            jogadorMessage = proximoJogador === 'X' ? 'O' : 'X';
+            message.innerHTML = `Vez do jogador ${jogadorMessage}`;
         } else {
             alert('Você não pode jogar em uma casa ocupada');
         }

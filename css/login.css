@@ -1,0 +1,63 @@
+html, body {
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #333333;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 25%;
+}
+
+.container .form {
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #fcfcfc;
+    box-shadow: 0 0 20px 0px #ffd522;
+}
+
+.container .form .img {
+    text-align: center;
+}
+
+.container .form .img h4 {
+    color: #808080;
+}
+
+.container fieldset {
+    border: none;
+    padding: 0;
+}
+
+.container fieldset div {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.container fieldset div label {
+    display: block;
+    text-align: left;
+    margin-bottom: 3px;
+}
+
+.buttons {
+    text-align: center;
+}
+
+.container fieldset div input {
+    box-shadow: 0px 0px 10px 1px gray;
+    border: 0;
+    padding: 5px;
+    border-radius: 5px;
+    margin: 10px 0;
+}
+
+.buttons button {
+    margin: 0 5px;
+    background-color: #ffd522;
+    border-radius: 5px;
+
+}
+

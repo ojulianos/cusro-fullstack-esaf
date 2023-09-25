@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>If-Else</title>
+</head>
+<body>
+    <h1>Titulo</h1>
+
+    <div class="centro">
+        <p>
+            Estruturas de decisão ou condicionais
+        </p>
+    </div>
+
+    <script>
+        /* comentario */
+
+        // comentario
+
+        let nome1 = 'joao';
+        let nome2 = prompt('digite um nome: ');
+        
+        if (nome1 == nome2) {
+            console.log(` ${nome1} é igual ${nome2} `);
+        } else if (nome2.length > 5 && nome2.length < 10) {
+            console.log(` ${nome2} é maior que 5 é ${nome2.length} `);
+        } else if (
+            nome2.charAt(0).toLowerCase() == 'j' ||
+            nome2.charAt(0).toLowerCase() == 't' ||
+            nome2.charAt(0).toLowerCase() == 'd'
+        ) {
+            let primeiraLetra = nome2.charAt(0).toLowerCase();
+            console.log(`a primeira letra de  ${nome2} é "${primeiraLetra}" `);
+        } else {
+            console.log(` ${nome1} é diferente ${nome2} `);
+        }
+        console.log(primeiraLetra);
+        console.log('fim do processo');
+    </script>
+</body>
+</html>

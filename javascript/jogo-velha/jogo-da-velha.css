@@ -1,0 +1,36 @@
+body {
+    font-family: 'Trebuchet MS',  Arial, sans-serif;
+}
+
+.hide {
+    display: none;
+}
+
+#container {
+    width: 500px;
+    margin: 50px auto;
+    text-align: center;
+}
+
+#table-data {
+    margin: 30px auto;
+    text-align: center;
+    vertical-align: middle;
+}
+
+#table-data td{
+    width: 60px;
+    height: 60px;
+    border: 1px solid #000;
+    font-size: 40px;
+    font-weight: bolder;
+    cursor: pointer;
+}
+
+.venceu {
+    background-color: green;
+}
+
+.velha {
+    color: #feb8b8;
+}

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo da Velha</title>
+    <link rel="stylesheet" href="jogo-da-velha.css">
+</head>
+<body>
+    
+    <div id="container">
+
+        <h1>Jogo da Velha</h1>
+
+        <table id="table-data" class="hide">
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+
+        <p id="message">
+            Clique no botão para inicar o jogo.
+        </p>
+
+        <button id="btn-inicio" onclick="iniciarJogo()">
+            Iniciar Jogo
+        </button>
+
+        <button id="btn-reset" class="hide" onclick="cancelarJogo()">
+            Cancelar Jogo
+        </button>
+
+    </div>
+
+    <script src="jogo-da-velha.js"></script>
+</body>
+</html>

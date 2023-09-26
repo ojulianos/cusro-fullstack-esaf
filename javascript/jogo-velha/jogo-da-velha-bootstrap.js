@@ -1,4 +1,3 @@
-let container = '';
 let tableData = document.getElementById('table-data');
 let tableDataTd = document.querySelectorAll('#table-data td');
 let message = document.getElementById('message');
@@ -7,20 +6,11 @@ let btnReset = document.getElementById('btn-reset');
 let jogador = 0;
 let vencedor = 0;
 let possibilidades = [
-    [0,1,2], // linha 1
-    [3,4,5], // linha 2 
-    [6,7,8], // linha 3
-    [0,3,6], // coluna 1
-    [1,4,7], // coluna 2
-    [2,5,8], // coluna 3
-    [0,4,8], // diagonal 1
-    [2,4,6], // diagonal 2
+    [0,1,2], [3,4,5], [6,7,8], 
+    [0,3,6], [1,4,7], [2,5,8], 
+    [0,4,8], [2,4,6], 
 ];
-let placar = {
-    X: 0 ,
-    O: 0 ,
-    V: 0 ,
-}
+let placar = { X: 0, O: 0, V: 0}
 
 function iniciarJogo() {
     tableData.classList.remove('d-none');

@@ -1,0 +1,14 @@
+#table-data {
+    margin: 30px auto;
+    text-align: center;
+    vertical-align: middle;
+    width: 360px;
+}
+
+#table-data td{
+    width: 120px !important;
+    height: 120px !important;
+    font-size: 40px;
+    font-weight: bolder;
+    cursor: pointer;
+}

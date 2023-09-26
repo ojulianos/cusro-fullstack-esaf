@@ -44,7 +44,7 @@ function cancelarJogo() {
     btnReset.textContent = 'Cancelar Jogo';
 
     for (let i=0; i<tableDataTd.length; i++) {
-        tableDataTd[i].classList.remove('venceu');
+        tableDataTd[i].classList.remove('bg-success');
         tableDataTd[i].classList.remove('velha');
     }
 }
@@ -82,7 +82,7 @@ for (let i=0; i < tableDataTd.length; i++) {
 
         if (validarVelha()) {
             for (let i=0; i < tableDataTd.length; i++) {
-                tableDataTd[i].classList.add('velha');
+                tableDataTd[i].classList.add('bg-danger');
             }
             message.innerHTML = 'DEU VELHA';
             placar.V++;
@@ -104,18 +104,18 @@ function validarVelha() {
 
 function validarItens(x, y ,z) {
     if (x.innerText == 'X' && y.innerText == 'X' && z.innerText == 'X') {
-        x.classList.add('venceu');
-        y.classList.add('venceu');
-        z.classList.add('venceu');
+        x.classList.add('bg-success');
+        y.classList.add('bg-success');
+        z.classList.add('bg-success');
         placar.X++;
         document.querySelector('#placarX').innerText = placar.X;
         return 'Jogador X Venceu';
     }
 
     if (x.innerText == 'O' && y.innerText == 'O' && z.innerText == 'O') {
-        x.classList.add('venceu');
-        y.classList.add('venceu');
-        z.classList.add('venceu');
+        x.classList.add('bg-success');
+        y.classList.add('bg-success');
+        z.classList.add('bg-success');
         placar.O++;
         document.querySelector('#placarO').innerText = placar.O;
         return 'Jogador O Venceu';

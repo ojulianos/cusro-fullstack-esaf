@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-bs-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Afazeres</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body>
+
+    <div class="container px-4 py-5">
+
+        <div class="card text-center">
+            <div class="card-header">
+                LISTA DE AFAZERES
+            </div>
+            <div class="card-body">
+
+                <div class="row">
+                    <div class="col text-start">
+
+                        <ul class="list-group">
+                            <li class="list-group-item hstack gap-2">
+                                <input class="form-check-input" type="checkbox" value="" id="firstCheckbox">
+                                <label class="form-check-label" for="firstCheckbox">
+                                    Fazer slides
+                                </label>
+                                <span class="ms-auto text-end">
+                                    <span class="badge bg-primary rounded-pill" role="button">
+                                        <i class="bi bi-pencil"></i>
+                                    </span>
+                                    <span class="badge bg-danger rounded-pill" role="button">
+                                        <i class="bi bi-trash"></i>
+                                    </span>
+                                </span>
+                            </li>
+                        </ul>
+
+                    </div>
+                    <div class="col text-start">
+
+                        <form action="?p-salvar" method="post">
+
+                            <div class="mb-3">
+                                <label for="iTituloTarefa" class="form-label">Tarefa</label>
+                                <input type="text" class="form-control" name="iTituloTarefa" id="iTituloTarefa"
+                                    placeholder="Digite a tarefa">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="tDescricaoTarefa" class="form-label">Descrição Tarefa</label>
+                                <textarea class="form-control" name="tDescricaoTarefa" id="tDescricaoTarefa"
+                                    rows="2"></textarea>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="sTipoDeTarefa" class="form-label">Tipo de Tarefa</label>
+
+                                <select class="form-select" id="sTipoDeTarefa" aria-label="Tipo de Tarefa">
+                                    <option selected>Selecione um tipo</option>
+                                    <option value="bg-danger">Urgente</option>
+                                    <option value="bg-warning">Importante</option>
+                                    <option value="bg-primary">Sem Importância</option>
+                                </select>
+                            </div>
+
+                            <div class="text-end d-grid gap-2">
+                                <button type="submit" class="btn btn-block btn-success">
+                                    Salvar
+                                </button>
+                            </div>
+
+                        </form>
+
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="card-footer text-body-secondary">
+                <span id="prontos">0</span> FINALIZADOS
+            </div>
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>

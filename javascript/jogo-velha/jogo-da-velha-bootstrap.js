@@ -35,7 +35,7 @@ function cancelarJogo() {
 
     for (let i=0; i<tableDataTd.length; i++) {
         tableDataTd[i].classList.remove('bg-success');
-        tableDataTd[i].classList.remove('velha');
+        tableDataTd[i].classList.remove('bg-danger');
     }
 }
 

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+
+    <link href="https://getbootstrap.com/docs/5.1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <link href="https://getbootstrap.com/docs/5.1/examples/carousel/carousel.css" rel="stylesheet" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <main>
+        <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 bg-light">
+            <div class="row featurette">
+
+                <div class="col-12">
+                    <h4 class="mb-3">Contato</h4>
+                    <p>
+                        Exemplo de mudança de página sem recarregar todo o conteúdo.
+                    </p>
+                    <form class="needs-validation" novalidate>
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <label for="firstName" class="form-label">Nome</label>
+                                <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+                                <div class="invalid-feedback">
+                                    Digite um nome válido.
+                                </div>
+                            </div>
+        
+                            <div class="col-12">
+                                <label for="email" class="form-label">Email <span class="text-muted">(Opcional)</span></label>
+                                <input type="email" class="form-control" id="email" placeholder="you@example.com">
+                                <div class="invalid-feedback">
+                                    Digite um e-mail válido.
+                                </div>
+                            </div>
+        
+                            <div class="col-12">
+                                <label for="contactType" class="form-label">Tipo de Contato</label>
+                                <select class="form-select" id="contactType" required>
+                                    <option value="">Selecione...</option>
+                                    <option>Assistência</option>
+                                    <option>Dúvida</option>
+                                    <option>Sugestão</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    Selecione um tipo de contato válido.
+                                </div>
+                            </div>
+        
+                            <div class="col-12">
+                                <label for="message" class="form-label">Mensagem</label>
+                                <textarea class="form-control" id="message" rows="3" placeholder="Digite sua mensagem aqui..."
+                                    required></textarea>
+                                <div class="invalid-feedback">
+                                    Digite uma mansagem válida.
+                                </div>
+                            </div>
+                        </div>
+        
+                        <hr class="my-4">
+        
+                        <button class="w-100 btn btn-primary btn-lg" type="submit">Enviar</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+
+</body>
+
+</html>

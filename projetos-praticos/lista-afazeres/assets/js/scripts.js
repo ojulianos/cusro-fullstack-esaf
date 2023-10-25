@@ -1,3 +1,7 @@
+let sumir = document.querySelector('#sumir');
+let listaDeItensLi = document.querySelectorAll('#listaDeItens li');
+
+
 function mudarTema() {
     let html = document.querySelector('html');
     let btnMudaTema = document.querySelector('#btnMudaTema');
@@ -21,6 +25,18 @@ function ehDark(html) {
    return html.getAttribute('data-bs-theme') === 'dark';
 }
 
+function deleteItem(id) {
+    document.querySelector('#itemId' + id).remove();
+    let posicao = document.querySelectorAll('#listaDeItens li').length;
+    if (posicao === 0) {
+        sumir.classList.remove('d-none');
+    }
+}
+
+function editItem(id) {
+    
+}
+
 const formAddItem = document.querySelector('#formAddItem');
 formAddItem.addEventListener('submit', function(e) {
     e.preventDefault();
@@ -29,29 +45,45 @@ formAddItem.addEventListener('submit', function(e) {
     let tDescricaoTarefa = document.querySelector('#tDescricaoTarefa');
     let sTipoDeTarefa = document.querySelector('#sTipoDeTarefa');
     let listaDeItens = document.querySelector('#listaDeItens');
+    
+    if (iTituloTarefa.value.trim().length <= 1) {
+        alert('Preencha o campo tarefa');
+        return;
+    }
 
-    let templateItem = `
-        <input class="form-check-input" type="checkbox" value="" id="firstCheckbox">
-        <label class="form-check-label" for="firstCheckbox">
+    if (sTipoDeTarefa.value === 'bg-danger' || sTipoDeTarefa.value === 'bg-warning' || sTipoDeTarefa.value === 'bg-primary') {
+        let posicao = document.querySelectorAll('#listaDeItens li').length;
+
+        let templateItem = `
+            <input class="form-check-input" type="checkbox" value="" id="firstCheckbox">
+            <label class="form-check-label" for="firstCheckbox">
             ${iTituloTarefa.value} <br>
             <small>
-                ${tDescricaoTarefa.value}
-            </small>
-        </label>
-        <span class="ms-auto text-end">
-            <span class="badge bg-primary rounded-pill" role="button">
-                <i class="bi bi-pencil"></i>
+                    ${tDescricaoTarefa.value}
+                </small>
+            </label>
+            <span class="ms-auto text-end">
+                <span class="badge bg-primary rounded-pill" role="button" onclick="editItem(${posicao})>
+                    <i class="bi bi-pencil"></i>
+                </span>
+                <span class="badge bg-danger rounded-pill" role="button" onclick="deleteItem(${posicao})">
+                    <i class="bi bi-trash"></i>
+                </span>
             </span>
-            <span class="badge bg-danger rounded-pill" role="button">
-                <i class="bi bi-trash"></i>
-            </span>
-        </span>
-    `;
+        `;
 
-    let itemDaLista = document.createElement('li');
-    itemDaLista.classList.add('list-group-item', 'hstack', 'gap-2', sTipoDeTarefa.value);
-    itemDaLista.innerHTML = templateItem;
-
-    listaDeItens.appendChild(itemDaLista);
-
+        let itemDaLista = document.createElement('li');
+        itemDaLista.classList.add('list-group-item', 'hstack', 'gap-2', sTipoDeTarefa.value);
+        itemDaLista.id = 'itemId' + posicao;
+        itemDaLista.innerHTML = templateItem;
+        listaDeItens.appendChild(itemDaLista);
+        
+        if (posicao === 0) {
+            sumir.classList.add('d-none');
+        }
+        
+    } else {
+        alert('Seleciona um tipo válido');
+        return;
+    }
 });

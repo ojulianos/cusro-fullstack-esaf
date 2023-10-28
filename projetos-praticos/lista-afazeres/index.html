@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 
-<body>
+<body onload="inicio()">
 
     <div class="container px-4 py-5">
 
@@ -59,11 +59,12 @@
                             </div>
 
                             <div class="text-end d-grid gap-2">
+                                <input type="hidden" name="iIdItem" id="iIdItem" value="">
                                 <button type="submit" class="btn btn-block btn-success">
                                     Salvar
                                 </button>
 
-                                <button type="button" class="btn btn-dark a b c d cavalo" id="btnMudaTema" onclick="mudarTema()">Muda Tema</button>
+                                <button type="button" class="btn btn-dark" id="btnMudaTema" onclick="mudarTema()">Muda Tema</button>
                             </div>
 
                         </form>

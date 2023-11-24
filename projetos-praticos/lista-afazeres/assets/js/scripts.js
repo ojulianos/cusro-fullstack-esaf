@@ -3,23 +3,39 @@ let $$ = function(element) { return document.querySelectorAll(element); };
 
 let sumir = $('#sumir');
 let listaDeItensLi = $$('#listaDeItens li');
-
+const CHAVE_BANCO_DADOS = 'LISTA-DE-TAREFAS';
 
 function inicio(){
-    let localData = localStorage.getItem('LISTA-DE-TAREFAS')
+    let localData = localStorage.getItem(CHAVE_BANCO_DADOS);
+    // [] '' false undefine null
+    if (!localData) {
+        localStorage.setItem(CHAVE_BANCO_DADOS, '[]');
+        localData = localStorage.getItem(CHAVE_BANCO_DADOS);
+    }
+
     if (localData) {
-        document.querySelector('#sumir').classList.add('d-none');
+        $('#listaDeItens').innerHTML = '';
+        $('#sumir').classList.add('d-none');
         localData = JSON.parse(localData);
 
         for (let i = 0; i < localData.length; i++) {
+            checked = '';
+            btnEdit = '';
+            classChecked = '-';
+            if (localData[i].status == 1) {
+                checked = 'checked';
+                btnEdit = 'd-none';
+                classChecked = 'text-decoration-line-through';
+            }
+
             let templateItem = `
-                <input class="form-check-input" type="checkbox" id="finalizaItem${i}" onclick="finalizaItem(${i})">
+                <input class="form-check-input" type="checkbox" id="finalizaItem${i}" onclick="finalizaItem(${i})" ${checked}>
                 <label class="form-check-label" for="finalizaItem${i}">
                     <span>${localData[i].tarefa}</span> <br>
                     <small>${localData[i].descricao}</small>
                 </label>
                 <span class="ms-auto text-end">
-                    <span class="badge bg-primary rounded-pill" role="button" onclick="editItem(${i})">
+                    <span class="badge bg-primary rounded-pill ${btnEdit}" id="btnEdit${i}" role="button" onclick="editItem(${i})">
                         <i class="bi bi-pencil"></i>
                     </span>
                     <span class="badge bg-danger rounded-pill" role="button" onclick="deleteItem(${i})">
@@ -28,7 +44,7 @@ function inicio(){
                 </span>
             `;
             let itemDaLista = document.createElement('li');
-            itemDaLista.classList.add('list-group-item', 'hstack', 'gap-2', localData[i].tipo);
+            itemDaLista.classList.add('list-group-item', 'hstack', 'gap-2', localData[i].tipo, classChecked);
             itemDaLista.id = 'itemId' + i;
             itemDaLista.innerHTML = templateItem;
             listaDeItens.appendChild(itemDaLista);
@@ -60,11 +76,17 @@ function ehDark(html) {
 }
 
 function deleteItem(id) {
-    $('#itemId' + id).remove();
-    let posicao = $$('#listaDeItens li').length;
-    if (posicao === 0) {
-        sumir.classList.remove('d-none');
-    }
+    let listaDeItens = JSON.parse(localStorage.getItem(CHAVE_BANCO_DADOS));
+    listaDeItens.splice(id, 1);
+    listaDeItens = JSON.stringify(listaDeItens);
+    localStorage.setItem(CHAVE_BANCO_DADOS, listaDeItens);
+
+    $('#iTituloTarefa').value = '';
+    $('#tDescricaoTarefa').value = '';
+    $('#sTipoDeTarefa').value = 'Selecione um tipo';
+    $('#iIdItem').value = '';
+
+    inicio();
 }
 
 function editItem(id) {
@@ -86,15 +108,23 @@ function editItem(id) {
 }
 
 function finalizaItem(id) {
-    let checkboxAtual = document.querySelector('#finalizaItem' + id + ':checked');
-    if (checkboxAtual) {
-        document.querySelector('#itemId'+id).classList.add('text-decoration-line-through');
-    } else {
-        document.querySelector('#itemId'+id).classList.remove('text-decoration-line-through');
-    }
+    let checkboxAtual = $('#finalizaItem' + id + ':checked');
+    let listaDeItens = JSON.parse(localStorage.getItem(CHAVE_BANCO_DADOS));
 
-    let itensFinalizados = document.querySelectorAll('#listaDeItens input[type=checkbox]:checked').length;
-    document.querySelector('#prontos').textContent = itensFinalizados;
+    if (checkboxAtual) {
+        listaDeItens[id].status = 1;
+        $('#itemId'+id).classList.add('text-decoration-line-through');
+        $('#btnEdit'+id).classList.add('d-none');
+    } else {
+        listaDeItens[id].status = 0;
+        $('#itemId'+id).classList.remove('text-decoration-line-through');
+        $('#btnEdit'+id).classList.remove('d-none');
+    }
+    
+    localStorage.setItem(CHAVE_BANCO_DADOS, JSON.stringify(listaDeItens));
+
+    let itensFinalizados = $$('#listaDeItens input[type=checkbox]:checked').length;
+    $('#prontos').textContent = itensFinalizados;
 }
 
 const formAddItem = $('#formAddItem');
@@ -122,7 +152,7 @@ formAddItem.addEventListener('submit', function(e) {
                 <small>${tDescricaoTarefa.value}</small>
             </label>
             <span class="ms-auto text-end">
-                <span class="badge bg-primary rounded-pill" role="button" onclick="editItem(${posicao})">
+                <span class="badge bg-primary rounded-pill" role="button" id="btnEdit${posicao}" onclick="editItem(${posicao})">
                     <i class="bi bi-pencil"></i>
                 </span>
                 <span class="badge bg-danger rounded-pill" role="button" onclick="deleteItem(${posicao})">
@@ -131,10 +161,7 @@ formAddItem.addEventListener('submit', function(e) {
             </span>
         `;
 
-        let localStorageItem = localStorage.getItem('LISTA-DE-TAREFAS');
-        if (localStorageItem) {
-            localStorage.setItem('LISTA-DE-TAREFAS', '');
-        }
+        let localStorageItem = localStorage.getItem(CHAVE_BANCO_DADOS);
     
         let itensListaTarefa = {
             "tarefa": iTituloTarefa.value,
@@ -155,7 +182,7 @@ formAddItem.addEventListener('submit', function(e) {
 
             localStorageItem = JSON.parse(localStorageItem);
             localStorageItem[idItemEditado[1]] = itensListaTarefa;
-            localStorage.setItem('LISTA-DE-TAREFAS', JSON.stringify(localStorageItem));
+            localStorage.setItem(CHAVE_BANCO_DADOS, JSON.stringify(localStorageItem));
 
         } else {
             let itemDaLista = document.createElement('li');
@@ -167,21 +194,16 @@ formAddItem.addEventListener('submit', function(e) {
             if (localStorageItem.trim().length > 0) {
                 localStorageItem = JSON.parse(localStorageItem);
                 localStorageItem.push(itensListaTarefa);
-                localStorage.setItem('LISTA-DE-TAREFAS', JSON.stringify(localStorageItem));
+                localStorage.setItem(CHAVE_BANCO_DADOS, JSON.stringify(localStorageItem));
             } else {
                 let itemNovoNaLista = [itensListaTarefa];
-                localStorage.setItem('LISTA-DE-TAREFAS', JSON.stringify(itemNovoNaLista));
+                localStorage.setItem(CHAVE_BANCO_DADOS, JSON.stringify(itemNovoNaLista));
             }
         }
 
-        
         if (posicao === 0) {
             sumir.classList.add('d-none');
         }
-        
-
-    
-
 
         iTituloTarefa.value = '';
         tDescricaoTarefa.value = '';

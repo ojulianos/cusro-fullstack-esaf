@@ -1,0 +1,178 @@
+{
+	"info": {
+		"_postman_id": "cb0609eb-7a95-4b1f-9070-f5fe1fcd018d",
+		"name": "Atividade REST Full",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "2299727"
+	},
+	"item": [
+		{
+			"name": "GET All",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "https://cryptic-stream-94767-b9f22ccd744b.herokuapp.com/1"
+			},
+			"response": []
+		},
+		{
+			"name": "Get One",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "tarefa",
+							"value": "Titulo da tarefa alterada",
+							"type": "default"
+						},
+						{
+							"key": "descricao",
+							"value": "Detalhes da tarefa",
+							"type": "default"
+						},
+						{
+							"key": "tipo",
+							"value": "bg-danger",
+							"type": "default"
+						},
+						{
+							"key": "status",
+							"value": "0",
+							"type": "default"
+						},
+						{
+							"key": "usuario",
+							"value": "1",
+							"type": "default"
+						}
+					]
+				},
+				"url": "https://cryptic-stream-94767-b9f22ccd744b.herokuapp.com/show/1"
+			},
+			"response": []
+		},
+		{
+			"name": "Create One",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "tarefa",
+							"value": "Titulo da tarefa",
+							"type": "default"
+						},
+						{
+							"key": "descricao",
+							"value": "Detalhes da tarefa",
+							"type": "default"
+						},
+						{
+							"key": "tipo",
+							"value": "bg-danger",
+							"type": "default"
+						},
+						{
+							"key": "status",
+							"value": "0",
+							"type": "default"
+						},
+						{
+							"key": "usuario",
+							"value": "1",
+							"type": "default"
+						}
+					]
+				},
+				"url": "https://cryptic-stream-94767-b9f22ccd744b.herokuapp.com/"
+			},
+			"response": []
+		},
+		{
+			"name": "Update One",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "tarefa",
+							"value": "Titulo da tarefa alterada",
+							"type": "default"
+						},
+						{
+							"key": "descricao",
+							"value": "Detalhes da tarefa",
+							"type": "default"
+						},
+						{
+							"key": "tipo",
+							"value": "bg-danger",
+							"type": "default"
+						},
+						{
+							"key": "status",
+							"value": "0",
+							"type": "default"
+						},
+						{
+							"key": "usuario",
+							"value": "1",
+							"type": "default"
+						}
+					]
+				},
+				"url": "https://cryptic-stream-94767-b9f22ccd744b.herokuapp.com/6"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete One",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "tarefa",
+							"value": "Titulo da tarefa alterada",
+							"type": "default"
+						},
+						{
+							"key": "descricao",
+							"value": "Detalhes da tarefa",
+							"type": "default"
+						},
+						{
+							"key": "tipo",
+							"value": "bg-danger",
+							"type": "default"
+						},
+						{
+							"key": "status",
+							"value": "0",
+							"type": "default"
+						},
+						{
+							"key": "usuario",
+							"value": "1",
+							"type": "default"
+						}
+					]
+				},
+				"url": "https://cryptic-stream-94767-b9f22ccd744b.herokuapp.com/6"
+			},
+			"response": []
+		}
+	]
+}

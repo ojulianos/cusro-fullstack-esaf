@@ -1,0 +1,24 @@
+{
+    "name": "juliano/bi",
+    "description": "Sistema de gerenciamento de contas e cadastro de usuarios",
+    "type": "project",
+    "require": {
+        "phpmailer/phpmailer": "^6.9",
+        "mpdf/mpdf": "^6.1",
+        "twig/twig": "^3.10"
+    },
+    "license": "GPL",
+    "autoload": {
+        "psr-4": {
+            "Juliano\\Bi\\": "src/"
+        },
+        "files": [
+            "config/imports.php"
+        ]
+    },
+    "authors": [
+        {
+            "name": "Juliano SIlva"
+        }
+    ]
+}

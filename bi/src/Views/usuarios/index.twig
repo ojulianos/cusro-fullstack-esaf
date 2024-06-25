@@ -10,7 +10,14 @@
             <th scope="col">Nome</th>
             <th scope="col">Email</th>
             <th scope="col">
-                <a href="?page=create">Novo Usuario</a>
+                <button type="button"
+                    class="btn btn-sm btn-secondary"
+                    data-bs-toggle="modal"
+                    data-bs-target="#formUsuarios"
+                    data-bs-type="create"
+                >
+                    Novo Usuario
+                </button>
             </th>
         </tr>
     </thead>
@@ -21,13 +28,53 @@
             <td>{{ usuario.name }}</td>
             <td>{{ usuario.email }}</td>
             <td>
-                <a href="?page=edit&id={{ usuario.id }}" class="text-success">Editar</a>
-                <a href="javascript:void(0)" onclick="deleteItem({{ usuario.id }})" class="text-danger">Excluir</a>
+                <button type="button"
+                    class="btn btn-sm btn-primary"
+                    data-bs-toggle="modal"
+                    data-bs-target="#formUsuarios"
+                    data-bs-type="edit"
+                    data-bs-id="{{ usuario.id }}"
+                >
+                    Editar
+                </button>
+                <a href="javascript:void(0)" onclick="deleteItem({{ usuario.id }})" class="btn btn-sm btn-danger">Excluir</a>
             </td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
+
+
+
+
+
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="formUsuarios" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="formUsuariosLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="formUsuariosLabel">Modal title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+            <div class="d-flex justify-content-center d-none" id="formUsuariosSpinner">
+                <div class="spinner-border" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
 
 <script>
     function deleteItem(id) {
@@ -35,5 +82,37 @@
             window.location.href = "?page=delete&id=" + id;
         }
     }
+
+
+
+    const formUsuarios = document.getElementById('formUsuarios')
+    if (formUsuarios) {
+        formUsuarios.addEventListener('show.bs.modal', event => {
+            $('#formUsuariosSpinner').removeClass('d-none');
+            $('#formUsuarios .modal-body').html('');
+            
+            const button = event.relatedTarget
+            const type = button.getAttribute('data-bs-type')
+            const id = button.getAttribute('data-bs-id')
+
+            if (type == 'create') {
+                $('#formUsuariosLabel').text('Criar Usuario');
+            } else {
+                $('#formUsuariosLabel').text('Alterar Usuario');
+            }
+
+            ////////////////////////////
+            
+            $.ajax({
+                url: "?page=" + type,
+                data: { id }
+            }).done(function(data) {
+                $('#formUsuarios .modal-body').html(data);
+                $('#formUsuariosSpinner').addClass('d-none');
+            });
+        })
+    }
+
+
 </script>
 {% endblock %}

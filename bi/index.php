@@ -3,7 +3,7 @@
 require_once "vendor/autoload.php";
 
 if (isset($_SESSION["estaLogado"]) && $_SESSION["estaLogado"]) {
-    header('Location: dashboard.php');
+    header('Location: home.php');
 }
 
 if (isset($_REQUEST['page']) && $_REQUEST['page'] == 'logar') {
@@ -19,7 +19,7 @@ if (isset($_REQUEST['page']) && $_REQUEST['page'] == 'logar') {
         while ($usuario = $usuarios->fetch_object()) {
           $_SESSION["usuarioNome"] = $usuario->name;
         }
-        header('Location: dashboard.php');
+        header('Location: home.php');
     } else {
         $_SESSION["mensagemLogado"] = "Usuario invalido";
     }

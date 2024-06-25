@@ -1,7 +1,3 @@
-{% extends "templates/logado.twig" %}
-
-{% block content %}
-<h1>{{ title }}</h1>
 
 <form method="POST" action="?page=store">
 
@@ -15,17 +11,20 @@
         <input type="text" class="form-control form-control-sm" id="email" name="email" placeholder="Digite o email" value="{{ usuario.email }}" >
     </div>
 
-    <label>Senha</label>
-    <input type="password" name="password" id="password" placeholder="Digite seu password" />
-    <br>
+    <div class="mb-3">
+        <label for="password" class="form-label">Senha</label>
+        <input type="password" class="form-control form-control-sm" id="password" name="password" placeholder="Digite sua senha" />
+    </div>
 
-    <label>Confirmar Senha</label>
-    <input type="password" name="password_confirm" id="password_confirm" placeholder="Digite seu password" />
-    <br>
+    <div class="mb-3">
+        <label for="password_confirm" class="form-label">Confirmar Senha</label>
+        <input type="password" class="form-control form-control-sm" id="password_confirm" name="password_confirm" placeholder="Digite a senha novamente" />
+    </div>
 
     <input type="hidden" name="id" value="{{ usuario.id }}">
 
-    <button type="submit">Salvar</button>
+    <div class="text-end">
+        <button type="submit" class="btn btn-primary">Salvar</button>
+    </div>
 
 </form>
-{% endblock %}

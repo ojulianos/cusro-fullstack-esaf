@@ -37,7 +37,15 @@
                 >
                     Editar
                 </button>
-                <a href="javascript:void(0)" onclick="deleteItem({{ usuario.id }})" class="btn btn-sm btn-danger">Excluir</a>
+
+                <button type="button"
+                    class="btn btn-sm btn-danger"
+                    data-bs-toggle="modal"
+                    data-bs-target="#deleteUsuarios"
+                    data-bs-id="{{ usuario.id }}"
+                >
+                    Excluir
+                </button>
             </td>
         </tr>
         {% endfor %}
@@ -49,8 +57,6 @@
 
 
 
-  
-  <!-- Modal -->
   <div class="modal fade" id="formUsuarios" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="formUsuariosLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -72,6 +78,23 @@
     </div>
   </div>
 
+  <div class="modal fade" id="deleteUsuarios" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteUsuariosLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" >Confirmar exclusao do usuario?</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-footer">
+            <form action="?page=delete" id="deleteUsuarioForm">
+                <input type="hidden" id="deleteUsuarioId" value="" />
+                <button type="submit" class="btn btn-danger">Confirmar Exclusao</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
 
@@ -84,6 +107,30 @@
     }
 
 
+
+    const deleteUsuarios = document.getElementById('deleteUsuarios')
+    if (deleteUsuarios) {
+        deleteUsuarios.addEventListener('show.bs.modal', event => {
+            const button = event.relatedTarget
+            const id = button.getAttribute('data-bs-id')
+            $('#deleteUsuarioId').val(id)
+            deleteForm()
+        });
+    }
+
+    function deleteForm(){
+        $('#deleteUsuarioForm').on('submit', function(ev){
+            ev.preventDefault();
+    
+            $.ajax({
+                url: "?page=delete&id=" + $('#deleteUsuarioId').val(),
+                dataType: "json",
+            }).done(function(data) {
+                alert(data.message)
+                //location.reload()
+            });
+        })
+    }
 
     const formUsuarios = document.getElementById('formUsuarios')
     if (formUsuarios) {
@@ -109,10 +156,36 @@
             }).done(function(data) {
                 $('#formUsuarios .modal-body').html(data);
                 $('#formUsuariosSpinner').addClass('d-none');
+                enviaForm();
             });
         })
     }
 
+    function enviaForm() {
+        $('#formUsuario').on('submit', function(ev){
+            ev.preventDefault();
+            let errorMessages = $('#errorMessages');
+            errorMessages.html('');
+            $('#formUsuariosSpinner').removeClass('d-none');
+            $('#formUsuario').slideUp();
+
+            $.ajax({
+                url: "?page=store",
+                data: $(this).serialize(),
+                dataType: "json",
+            }).done(function(data) {
+                if (data.success) {
+                    $('#formUsuarios').modal('hide');
+                    alert(data.message)
+                    location.reload()
+                } else {
+                    errorMessages.html('<li>' + data.message + '</li>');
+                }
+                $('#formUsuariosSpinner').addClass('d-none');
+                $('#formUsuario').slideDown();
+            });
+        })
+    }
 
 </script>
 {% endblock %}

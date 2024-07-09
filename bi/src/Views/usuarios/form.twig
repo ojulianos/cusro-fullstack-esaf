@@ -1,27 +1,29 @@
 
-<form method="POST" action="?page=store">
+<form method="POST" action="?page=store" id="formUsuario">
 
     <div class="mb-3">
         <label for="name" class="form-label">Nome</label>
-        <input type="text" class="form-control form-control-sm" id="name" name="name" placeholder="Digite o nome" value="{{ usuario.name }}" >
+        <input type="text" class="form-control form-control-sm" id="name" name="name" placeholder="Digite o nome" value="{{ usuario.name }}" autocomplete="off">
     </div>
 
     <div class="mb-3">
         <label for="email" class="form-label">Email</label>
-        <input type="text" class="form-control form-control-sm" id="email" name="email" placeholder="Digite o email" value="{{ usuario.email }}" >
+        <input type="text" class="form-control form-control-sm" id="email" name="email" placeholder="Digite o email" value="{{ usuario.email }}" autocomplete="off">
     </div>
 
     <div class="mb-3">
         <label for="password" class="form-label">Senha</label>
-        <input type="password" class="form-control form-control-sm" id="password" name="password" placeholder="Digite sua senha" />
+        <input type="password" class="form-control form-control-sm" id="password" name="password" placeholder="Digite sua senha" autocomplete="off"/>
     </div>
 
     <div class="mb-3">
         <label for="password_confirm" class="form-label">Confirmar Senha</label>
-        <input type="password" class="form-control form-control-sm" id="password_confirm" name="password_confirm" placeholder="Digite a senha novamente" />
+        <input type="password" class="form-control form-control-sm" id="password_confirm" name="password_confirm" placeholder="Digite a senha novamente" autocomplete="off"/>
     </div>
 
     <input type="hidden" name="id" value="{{ usuario.id }}">
+
+    <ul id="errorMessages" class="text-danger"></ul>
 
     <div class="text-end">
         <button type="submit" class="btn btn-primary">Salvar</button>

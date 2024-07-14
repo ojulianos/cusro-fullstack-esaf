@@ -3,19 +3,15 @@
 {% block content %}
 <h1>{{ title }}</h1>
 
-<table class="table table-striped table-sm">
+<table class="table table-striped table-sm" id="tableUsuarios">
     <thead>
         <tr>
             <th scope="col">#</th>
             <th scope="col">Nome</th>
             <th scope="col">Email</th>
             <th scope="col">
-                <button type="button"
-                    class="btn btn-sm btn-secondary"
-                    data-bs-toggle="modal"
-                    data-bs-target="#formUsuarios"
-                    data-bs-type="create"
-                >
+                <button type="button" class="btn btn-sm btn-secondary" data-bs-toggle="modal"
+                    data-bs-target="#formUsuarios" data-bs-type="create">
                     Novo Usuario
                 </button>
             </th>
@@ -28,22 +24,13 @@
             <td>{{ usuario.name }}</td>
             <td>{{ usuario.email }}</td>
             <td>
-                <button type="button"
-                    class="btn btn-sm btn-primary"
-                    data-bs-toggle="modal"
-                    data-bs-target="#formUsuarios"
-                    data-bs-type="edit"
-                    data-bs-id="{{ usuario.id }}"
-                >
+                <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal"
+                    data-bs-target="#formUsuarios" data-bs-type="edit" data-bs-id="{{ usuario.id }}">
                     Editar
                 </button>
 
-                <button type="button"
-                    class="btn btn-sm btn-danger"
-                    data-bs-toggle="modal"
-                    data-bs-target="#deleteUsuarios"
-                    data-bs-id="{{ usuario.id }}"
-                >
+                <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
+                    data-bs-target="#deleteUsuarios" data-bs-id="{{ usuario.id }}">
                     Excluir
                 </button>
             </td>
@@ -57,135 +44,159 @@
 
 
 
-  <div class="modal fade" id="formUsuarios" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="formUsuariosLabel" aria-hidden="true">
+<div class="modal fade" id="formUsuarios" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="formUsuariosLabel" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="formUsuariosLabel">Modal title</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-            <div class="d-flex justify-content-center d-none" id="formUsuariosSpinner">
-                <div class="spinner-border" role="status">
-                  <span class="visually-hidden">Loading...</span>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="formUsuariosLabel">Modal title</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <div class="d-flex justify-content-center d-none" id="formUsuariosSpinner">
+                    <div class="spinner-border" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
                 </div>
             </div>
         </div>
-      </div>
     </div>
-  </div>
+</div>
 
-  <div class="modal fade" id="deleteUsuarios" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteUsuariosLabel" aria-hidden="true">
+<div class="modal fade" id="deleteUsuarios" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="deleteUsuariosLabel" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" >Confirmar exclusao do usuario?</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5">Confirmar exclusao do usuario?</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-footer">
+                <form action="?page=delete" id="deleteUsuarioForm">
+                    <input type="hidden" id="deleteUsuarioId" value="" />
+                    <button type="submit" class="btn btn-danger">Confirmar Exclusao</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                </form>
+            </div>
         </div>
-        <div class="modal-footer">
-            <form action="?page=delete" id="deleteUsuarioForm">
-                <input type="hidden" id="deleteUsuarioId" value="" />
-                <button type="submit" class="btn btn-danger">Confirmar Exclusao</button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-            </form>
-        </div>
-      </div>
     </div>
-  </div>
+</div>
 
 
+{% endblock %}
+
+{% block js %}
+
+
+<div id="myToast" class="toast align-items-center position-fixed bottom-0 end-0 p-3" role="alert" aria-live="assertive"
+    aria-atomic="true">
+    <div class="d-flex">
+        <div class="toast-body"></div>
+        <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+</div>
 
 
 <script>
-    function deleteItem(id) {
-        if (confirm("Deseja realmente apagar o usuario?")) {
-            window.location.href = "?page=delete&id=" + id;
-        }
-    }
 
 
-
-    const deleteUsuarios = document.getElementById('deleteUsuarios')
-    if (deleteUsuarios) {
-        deleteUsuarios.addEventListener('show.bs.modal', event => {
-            const button = event.relatedTarget
-            const id = button.getAttribute('data-bs-id')
-            $('#deleteUsuarioId').val(id)
-            deleteForm()
+    // datatable.ajax.reaload();
+    $(document).ready(function () {
+        let datatable = $('#tableUsuarios').DataTable({
+            ajax: '?page=datatable',
+            columns: [
+                { data: 'id' },
+                { data: 'name' },
+                { data: 'email' },
+                { data: 'buttons' },
+            ]
         });
-    }
 
-    function deleteForm(){
-        $('#deleteUsuarioForm').on('submit', function(ev){
-            ev.preventDefault();
-    
-            $.ajax({
-                url: "?page=delete&id=" + $('#deleteUsuarioId').val(),
-                dataType: "json",
-            }).done(function(data) {
-                alert(data.message)
-                //location.reload()
+        const deleteUsuarios = document.getElementById('deleteUsuarios')
+        if (deleteUsuarios) {
+            deleteUsuarios.addEventListener('show.bs.modal', event => {
+                const button = event.relatedTarget
+                const id = button.getAttribute('data-bs-id')
+                $('#deleteUsuarioId').val(id)
+                deleteForm()
             });
-        })
-    }
+        }
 
-    const formUsuarios = document.getElementById('formUsuarios')
-    if (formUsuarios) {
-        formUsuarios.addEventListener('show.bs.modal', event => {
-            $('#formUsuariosSpinner').removeClass('d-none');
-            $('#formUsuarios .modal-body').html('');
-            
-            const button = event.relatedTarget
-            const type = button.getAttribute('data-bs-type')
-            const id = button.getAttribute('data-bs-id')
+        function deleteForm() {
+            $('#deleteUsuarioForm').on('submit', function (ev) {
+                ev.preventDefault();
 
-            if (type == 'create') {
-                $('#formUsuariosLabel').text('Criar Usuario');
-            } else {
-                $('#formUsuariosLabel').text('Alterar Usuario');
-            }
+                $.ajax({
+                    url: "?page=delete&id=" + $('#deleteUsuarioId').val(),
+                    dataType: "json",
+                }).done(function (data) {
+                    datatable.ajax.reload()
+                    $('#deleteUsuarios').modal('hide');
+                    // $('#deleteUsuarios .btn-close').click();
+                    $('#myToast').toast('show');
+                    $('#myToast .toast-body').html(data.message);
+                });
+            })
+        }
 
-            ////////////////////////////
-            
-            $.ajax({
-                url: "?page=" + type,
-                data: { id }
-            }).done(function(data) {
-                $('#formUsuarios .modal-body').html(data);
-                $('#formUsuariosSpinner').addClass('d-none');
-                enviaForm();
-            });
-        })
-    }
+        const formUsuarios = document.getElementById('formUsuarios')
+        if (formUsuarios) {
+            formUsuarios.addEventListener('show.bs.modal', event => {
+                $('#formUsuariosSpinner').removeClass('d-none');
+                $('#formUsuarios .modal-body').html('');
 
-    function enviaForm() {
-        $('#formUsuario').on('submit', function(ev){
-            ev.preventDefault();
-            let errorMessages = $('#errorMessages');
-            errorMessages.html('');
-            $('#formUsuariosSpinner').removeClass('d-none');
-            $('#formUsuario').slideUp();
+                const button = event.relatedTarget
+                const type = button.getAttribute('data-bs-type')
+                const id = button.getAttribute('data-bs-id')
 
-            $.ajax({
-                url: "?page=store",
-                data: $(this).serialize(),
-                dataType: "json",
-            }).done(function(data) {
-                if (data.success) {
-                    $('#formUsuarios').modal('hide');
-                    alert(data.message)
-                    location.reload()
+                if (type == 'create') {
+                    $('#formUsuariosLabel').text('Criar Usuario');
                 } else {
-                    errorMessages.html('<li>' + data.message + '</li>');
+                    $('#formUsuariosLabel').text('Alterar Usuario');
                 }
-                $('#formUsuariosSpinner').addClass('d-none');
-                $('#formUsuario').slideDown();
-            });
-        })
-    }
 
+                ////////////////////////////
+
+                $.ajax({
+                    url: "?page=" + type,
+                    data: { id }
+                }).done(function (data) {
+                    $('#formUsuarios .modal-body').html(data);
+                    $('#formUsuariosSpinner').addClass('d-none');
+                    enviaForm();
+                });
+            })
+        }
+
+        function enviaForm() {
+            $('#formUsuario').on('submit', function (ev) {
+                ev.preventDefault();
+                let errorMessages = $('#errorMessages');
+                errorMessages.html('');
+                $('#formUsuariosSpinner').removeClass('d-none');
+                $('#formUsuario').slideUp();
+
+                $.ajax({
+                    url: "?page=store",
+                    data: $(this).serialize(),
+                    dataType: "json",
+                }).done(function (data) {
+                    if (data.success) {
+                        datatable.ajax.reload();
+                        $('#formUsuarios').modal('hide');
+                        $('#myToast').toast('show');
+                        $('#myToast .toast-body').html(data.message);
+                    } else {
+                        errorMessages.html('<li>' + data.message + '</li>');
+                    }
+                    $('#formUsuariosSpinner').addClass('d-none');
+                    $('#formUsuario').slideDown();
+                });
+            })
+        }
+    });
 </script>
 {% endblock %}

@@ -1,7 +1,7 @@
 <?php
 require_once "vendor/autoload.php";
 
-use Juliano\Bi\Controllers\Usuarios;
+use Sys\Bi\Controllers\Usuarios;
 
 $page = $_REQUEST['page'] ?? 'index';
 $usuarios = new Usuarios;

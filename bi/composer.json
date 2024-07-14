@@ -10,10 +10,11 @@
     "license": "GPL",
     "autoload": {
         "psr-4": {
-            "Juliano\\Bi\\": "src/"
+            "Sys\\Bi\\": "src/"
         },
         "files": [
-            "config/imports.php"
+            "config/imports.php",
+            "functions/helpers.php"
         ]
     },
     "authors": [

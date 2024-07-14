@@ -1,33 +1,64 @@
 <?php
 
-namespace Juliano\Bi\Controllers;
+namespace Sys\Bi\Controllers;
 
 use Exception;
 use Throwable;
 
-class Usuarios extends BaseController {
+class Usuarios extends BaseController
+{
 
-    public function index() {
+    public function index()
+    {
+        echo $this->twig('usuarios/index.twig', [
+            'title' => 'Lista de Usuarios',
+        ]);
+    }
+
+    public function datatable()
+    {
         $query_usuarios = "SELECT * FROM usuarios";
         $result_usuarios = DB->query($query_usuarios);
         $usuarios = [];
         while ($usuario = $result_usuarios->fetch_object()) {
+
+            $usuario->buttons = '<button type="button"
+            class="btn btn-sm btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#formUsuarios"
+            data-bs-type="edit"
+            data-bs-id="' . $usuario->id . '"
+        >
+            Editar
+        </button>
+
+        <button type="button"
+            class="btn btn-sm btn-danger"
+            data-bs-toggle="modal"
+            data-bs-target="#deleteUsuarios"
+            data-bs-id="' . $usuario->id . '"
+        >
+            Excluir
+        </button>';
             $usuarios[] = $usuario;
         }
-
-        echo $this->twig('usuarios/index.twig', [
-            'title' => 'Lista de Usuarios',
-            'usuarios' => $usuarios
+        
+        echo json_encode([
+            'data' => $usuarios
         ]);
     }
 
-    public function create() {
+
+
+    public function create()
+    {
         echo $this->twig('usuarios/form.twig', [
             'title' => 'Cadastro de Usuarios'
         ]);
     }
 
-    public function edit() {
+    public function edit()
+    {
         $id = $_REQUEST['id'];
 
         $query_usuarios = "SELECT * FROM usuarios WHERE id = $id";
@@ -40,7 +71,8 @@ class Usuarios extends BaseController {
         ]);
     }
 
-    public function store() {
+    public function store()
+    {
         try {
             $name = trim($_REQUEST['name']);
             $email = trim($_REQUEST['email']);
@@ -62,11 +94,11 @@ class Usuarios extends BaseController {
                 if ($result_usuarios->num_rows >= 1) {
                     throw new Exception("Ja existe usuario com esse email");
                 }
-                
+
                 if (strlen($password) < 5) {
                     throw new Exception('A senha deve ter no minimo 5 caracteres');
                 }
-    
+
                 if ($password != $passdowd_confirm) {
                     throw new Exception('As senhas devem ser iguais');
                 }
@@ -76,7 +108,7 @@ class Usuarios extends BaseController {
                     if (strlen($password) < 5) {
                         throw new Exception('A senha deve ter no minimo 5 caracteres');
                     }
-        
+
                     if ($password != $passdowd_confirm) {
                         throw new Exception('As senhas devem ser iguais');
                     }
@@ -105,7 +137,8 @@ class Usuarios extends BaseController {
         }
     }
 
-    public function delete() {
+    public function delete()
+    {
         try {
             $id = trim($_REQUEST['id']);
 
@@ -118,7 +151,7 @@ class Usuarios extends BaseController {
             if ($result_usuarios->num_rows < 1) {
                 throw new Exception("Esse usuario nao existe");
             }
-            
+
             $sql = "DELETE FROM usuarios WHERE id = {$id}";
 
             DB->query($sql);
@@ -134,6 +167,4 @@ class Usuarios extends BaseController {
             ]);
         }
     }
-
-
 }

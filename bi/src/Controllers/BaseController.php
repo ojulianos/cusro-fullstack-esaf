@@ -1,8 +1,12 @@
 <?php
 
-namespace Juliano\Bi\Controllers;
+namespace Sys\Bi\Controllers;
 
-class BaseController {
+use Exception;
+use Throwable;
+
+class BaseController
+{
 
     public function __construct($logado = true)
     {
@@ -11,7 +15,8 @@ class BaseController {
         }
     }
 
-    protected function twig(string $template, array $params) {
+    protected function twig(string $template, array $params)
+    {
         $loader = new \Twig\Loader\FilesystemLoader(BASE_DIR . '/src/Views/');
         $twig = new \Twig\Environment($loader, [
             // 'cache' => '/cache',
@@ -22,18 +27,17 @@ class BaseController {
         return $twig->render($template, $params);
     }
 
-    private function estaLogado() {
+    private function estaLogado()
+    {
         if ($_SESSION["estaLogado"] != true) {
             $_SESSION["mensagemLogado"] = "Usuario nao logado";
             header("Location: index.php");
         }
     }
 
-    public function sair() {
+    public function sair()
+    {
         session_destroy();
         header("Location: index.php");
     }
-
-
-
 }

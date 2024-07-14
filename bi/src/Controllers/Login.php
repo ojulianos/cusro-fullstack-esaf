@@ -1,6 +1,6 @@
 <?php
 
-namespace Juliano\Bi\Controllers;
+namespace Sys\Bi\Controllers;
 
 class Login extends BaseController {
 

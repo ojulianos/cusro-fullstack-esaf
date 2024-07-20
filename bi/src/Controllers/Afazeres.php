@@ -22,8 +22,8 @@ class Afazeres extends BaseController {
             'N' => '<span class="badge bg-primary">Não Prioritário</span>',
         ];
         $status = [
-            'A' => '<span class="badge bg-warning">&nbsp;</span>',
-            'C' => '<span class="badge bg-success">&nbsp;</span>'
+            'A' => '<span class="badge bg-warning"><i class="bi bi-dash-square-dotted"></i></span>',
+            'C' => '<span class="badge bg-success"><i class="bi bi-check-lg"></i></span>'
         ];
 
         $query_afazeres = "SELECT * FROM lista_afazeres";

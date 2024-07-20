@@ -1,13 +1,24 @@
 <?php
 require_once "vendor/autoload.php";
 
+use Sys\Bi\Controllers\Afazeres;
 use Sys\Bi\Controllers\Usuarios;
 
 $page = $_REQUEST['page'] ?? 'index';
-$usuarios = new Usuarios;
+$afazeres = new Afazeres;
 
-if (method_exists($usuarios, $page)) {
-    $usuarios->$page();
+// Tela de afazeres
+if (method_exists($afazeres, $page)) {
+    $afazeres->$page();
 } else {
-    $usuarios->index();
+    $afazeres->index();
 }
+
+// Tela de usuários
+// $usuarios = new Usuarios;
+
+// if (method_exists($usuarios, $page)) {
+//     $usuarios->$page();
+// } else {
+//     $usuarios->index();
+// }

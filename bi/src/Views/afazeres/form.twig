@@ -1,0 +1,34 @@
+
+<form method="POST" action="?page=store" id="formAfazer">
+
+    <div class="mb-3">
+        <label for="titulo" class="form-label">Título</label>
+        <input type="text" class="form-control form-control-sm" id="titulo" name="titulo" placeholder="Digite o título" value="{{ afazer.titulo }}" autocomplete="off">
+    </div>
+
+    <div class="mb-3">
+        <label for="detalhes" class="form-label">Detalhes</label>
+        <textarea class="form-control form-control-sm" id="detalhes" name="detalhes" placeholder="Descreva os passos da atividade" rows="3">{{ afazer.detalhes }}</textarea>
+    </div>
+
+    <div class="mb-3">
+        <label for="tipo" class="form-label">Tipo</label>
+        <select class="form-select form-select-sm" aria-label="Selecione o tipo" name="tipo">
+            <option selected>Selecione um opção</option>
+            <option value="U">Urgente</option>
+            <option value="P">Prioridade</option>
+            <option value="N">Não Prioritário</option>
+        </select>
+    </div>
+
+
+
+    <input type="hidden" name="id" value="{{ afazer.id }}">
+
+    <ul id="errorMessages" class="text-danger"></ul>
+
+    <div class="text-end">
+        <button type="submit" class="btn btn-primary">Salvar</button>
+    </div>
+
+</form>

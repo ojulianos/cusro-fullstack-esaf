@@ -18,6 +18,7 @@ if (isset($_REQUEST['page']) && $_REQUEST['page'] == 'logar') {
         $_SESSION["estaLogado"] = true;
         while ($usuario = $usuarios->fetch_object()) {
           $_SESSION["usuarioNome"] = $usuario->name;
+          $_SESSION["usuarioId"] = $usuario->id;
         }
         header('Location: home.php');
     } else {

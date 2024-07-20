@@ -1,0 +1,190 @@
+{% extends "templates/logado.twig" %}
+
+{% block content %}
+<h1>{{ title }}</h1>
+
+<table class="table table-striped table-sm" id="tableAfazeres">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Título</th>
+            <th scope="col">Detalhes</th>
+            <th scope="col">Tipo</th>
+            <th scope="col">Status</th>
+            <th scope="col">Dt. Cad. - Dt. Fin.</th>
+            <th scope="col">
+                <button type="button" class="btn btn-sm btn-secondary" data-bs-toggle="modal"
+                    data-bs-target="#formAfazeres" data-bs-type="create">
+                    Novo Afazer
+                </button>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+
+
+
+
+
+<div class="modal fade" id="formAfazeres" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="formAfazeresLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="formAfazeresLabel">Modal title</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <div class="d-flex justify-content-center d-none" id="formAfazeresSpinner">
+                    <div class="spinner-border" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="deleteAfazeres" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="deleteAfazeresLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5">Confirmar exclusao do afazer?</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-footer">
+                <form action="?page=delete" id="deleteAfazerForm">
+                    <input type="hidden" id="deleteAfazerId" value="" />
+                    <button type="submit" class="btn btn-danger">Confirmar Exclusao</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+
+{% block js %}
+
+
+<div id="myToast" class="toast align-items-center position-fixed bottom-0 end-0 p-3" role="alert" aria-live="assertive"
+    aria-atomic="true">
+    <div class="d-flex">
+        <div class="toast-body"></div>
+        <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+</div>
+
+
+<script>
+
+
+    // datatable.ajax.reaload();
+    $(document).ready(function () {
+        let datatable = $('#tableAfazeres').DataTable({
+            ajax: '?page=datatable',
+            columns: [
+                { data: 'id' },
+                { data: 'titulo' },
+                { data: 'detalhes' },
+                { data: 'tipo_txt' },
+                { data: 'status_txt' },
+                { data: 'datas' },
+                { data: 'buttons' },
+            ]
+        });
+
+        const deleteAfazeres = document.getElementById('deleteAfazeres')
+        if (deleteAfazeres) {
+            deleteAfazeres.addEventListener('show.bs.modal', event => {
+                const button = event.relatedTarget
+                const id = button.getAttribute('data-bs-id')
+                $('#deleteAfazerId').val(id)
+                deleteForm()
+            });
+        }
+
+        function deleteForm() {
+            $('#deleteAfazerForm').on('submit', function (ev) {
+                ev.preventDefault();
+
+                $.ajax({
+                    url: "?page=delete&id=" + $('#deleteAfazerId').val(),
+                    dataType: "json",
+                }).done(function (data) {
+                    datatable.ajax.reload()
+                    $('#deleteAfazeres').modal('hide');
+                    // $('#deleteAfazeres .btn-close').click();
+                    $('#myToast').toast('show');
+                    $('#myToast .toast-body').html(data.message);
+                });
+            })
+        }
+
+        const formAfazeres = document.getElementById('formAfazeres')
+        if (formAfazeres) {
+            formAfazeres.addEventListener('show.bs.modal', event => {
+                $('#formAfazeresSpinner').removeClass('d-none');
+                $('#formAfazeres .modal-body').html('');
+
+                const button = event.relatedTarget
+                const type = button.getAttribute('data-bs-type')
+                const id = button.getAttribute('data-bs-id')
+
+                if (type == 'create') {
+                    $('#formAfazeresLabel').text('Criar Afazer');
+                } else {
+                    $('#formAfazeresLabel').text('Alterar Afazer');
+                }
+
+                ////////////////////////////
+
+                $.ajax({
+                    url: "?page=" + type,
+                    data: { id }
+                }).done(function (data) {
+                    $('#formAfazeres .modal-body').html(data);
+                    $('#formAfazeresSpinner').addClass('d-none');
+                    enviaForm();
+                });
+            })
+        }
+
+        function enviaForm() {
+            $('#formAfazer').on('submit', function (ev) {
+                ev.preventDefault();
+                let errorMessages = $('#errorMessages');
+                errorMessages.html('');
+                $('#formAfazeresSpinner').removeClass('d-none');
+                $('#formAfazer').slideUp();
+
+                $.ajax({
+                    url: "?page=store",
+                    data: $(this).serialize(),
+                    dataType: "json",
+                }).done(function (data) {
+                    if (data.success) {
+                        datatable.ajax.reload();
+                        $('#formAfazeres').modal('hide');
+                        $('#myToast').toast('show');
+                        $('#myToast .toast-body').html(data.message);
+                    } else {
+                        errorMessages.html('<li>' + data.message + '</li>');
+                    }
+                    $('#formAfazeresSpinner').addClass('d-none');
+                    $('#formAfazer').slideDown();
+                });
+            })
+        }
+    });
+</script>
+{% endblock %}

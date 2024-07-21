@@ -33,9 +33,10 @@ class BaseController
     {
         $loader = new FilesystemLoader(BASE_DIR . '/src/Views/');
         $twig = new Environment($loader, [
-            'cache' => BASE_DIR . '/cache/twig', // Configura o cache, ajuste conforme necessário
+            // 'cache' => BASE_DIR . '/cache/twig', // Configura o cache, ajuste conforme necessário
         ]);
         $twig->addGlobal('TITLE', TITLE);
+        $twig->addGlobal('BASE_URL', BASE_URL);
         $twig->addGlobal('SESSION', $_SESSION);
 
         return $twig->render($template, $params);

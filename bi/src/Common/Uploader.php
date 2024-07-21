@@ -10,93 +10,73 @@ use Exception;
 class Uploader {
 
     /**
-     * @var string Diretório de upload
+     * Diretório onde os arquivos serão armazenados
+     * @var string
      */
     protected $uploadDir;
 
     /**
-     * Construtor para a classe Uploader
+     * Construtor da classe Uploader
      *
-     * @param string $uploadDir Diretório onde os arquivos serão salvos
+     * @param string $uploadDir Subdiretório onde os arquivos serão armazenados
      */
-    public function __construct(string $uploadDir) {
-        if (!is_dir($uploadDir)) {
-            throw new Exception("O diretório de upload não existe: " . $uploadDir);
+    public function __construct(string $uploadDir = 'uploads') {
+        $this->uploadDir = BASE_DIR . '/' . $uploadDir;
+        
+        // Cria o diretório de upload se não existir
+        if (!is_dir($this->uploadDir)) {
+            mkdir($this->uploadDir, 0777, true);
         }
-
-        $this->uploadDir = rtrim($uploadDir, '/') . '/';
     }
 
     /**
      * Faz o upload de um arquivo.
      *
-     * @param array $file Arquivo do array $_FILES
-     * @return string Caminho completo do arquivo salvo
-     * @throws Exception Se ocorrer um erro durante o upload
+     * @param array $file Dados do arquivo enviado ($_FILES['file'])
+     * @return string|false Caminho do arquivo salvo em caso de sucesso, falso em caso de falha
      */
-    public function upload(array $file): string {
+    public function upload(array $file) {
+        // Verifica se houve um erro no upload
         if ($file['error'] !== UPLOAD_ERR_OK) {
-            throw new Exception("Erro ao fazer upload do arquivo: " . $this->fileUploadErrorMessage($file['error']));
+            return false;
         }
 
-        $filename = basename($file['name']);
-        $targetPath = $this->uploadDir . $filename;
+        // Gera um nome único para o arquivo
+        $fileName = uniqid() . '_' . basename($file['name']);
+        $destination = $this->uploadDir . '/' . $fileName;
 
-        if (!move_uploaded_file($file['tmp_name'], $targetPath)) {
-            throw new Exception("Erro ao mover o arquivo para o diretório de destino");
+        // Move o arquivo para o diretório de upload
+        if (move_uploaded_file($file['tmp_name'], $destination)) {
+            return $fileName;
+        } else {
+            return false;
         }
-
-        return $targetPath;
     }
 
     /**
      * Faz o download de um arquivo.
      *
-     * @param string $filename Nome do arquivo a ser baixado
-     * @throws Exception Se o arquivo não existir
+     * @param string $fileName Nome do arquivo a ser baixado
+     * @return void
      */
-    public function download(string $filename) {
-        $filePath = $this->uploadDir . basename($filename);
+    public function download(string $fileName) {
+        $filePath = $this->uploadDir . '/' . $fileName;
 
-        if (!file_exists($filePath)) {
-            throw new Exception("Arquivo não encontrado: " . $filename);
-        }
-
-        header('Content-Description: File Transfer');
-        header('Content-Type: application/octet-stream');
-        header('Content-Disposition: attachment; filename="' . basename($filePath) . '"');
-        header('Expires: 0');
-        header('Cache-Control: must-revalidate');
-        header('Pragma: public');
-        header('Content-Length: ' . filesize($filePath));
-        readfile($filePath);
-        exit;
-    }
-
-    /**
-     * Retorna a mensagem de erro correspondente ao código de erro de upload.
-     *
-     * @param int $code Código de erro de upload
-     * @return string Mensagem de erro
-     */
-    protected function fileUploadErrorMessage(int $code): string {
-        switch ($code) {
-            case UPLOAD_ERR_INI_SIZE:
-                return 'O arquivo excede o tamanho máximo permitido pelo PHP.';
-            case UPLOAD_ERR_FORM_SIZE:
-                return 'O arquivo excede o tamanho máximo permitido pelo formulário HTML.';
-            case UPLOAD_ERR_PARTIAL:
-                return 'O arquivo foi parcialmente carregado.';
-            case UPLOAD_ERR_NO_FILE:
-                return 'Nenhum arquivo foi enviado.';
-            case UPLOAD_ERR_NO_TMP_DIR:
-                return 'Diretório temporário não encontrado.';
-            case UPLOAD_ERR_CANT_WRITE:
-                return 'Erro ao gravar o arquivo no disco.';
-            case UPLOAD_ERR_EXTENSION:
-                return 'Uma extensão do PHP interrompeu o upload do arquivo.';
-            default:
-                return 'Erro desconhecido ao fazer upload do arquivo.';
+        if (file_exists($filePath)) {
+            header('Content-Description: File Transfer');
+            header('Content-Type: application/octet-stream');
+            header('Content-Disposition: attachment; filename="' . basename($filePath) . '"');
+            header('Expires: 0');
+            header('Cache-Control: must-revalidate');
+            header('Pragma: public');
+            header('Content-Length: ' . filesize($filePath));
+            flush(); // Limpa o buffer do sistema
+            readfile($filePath);
+            exit;
+        } else {
+            http_response_code(404);
+            echo 'Arquivo não encontrado.';
+            exit;
         }
     }
 }

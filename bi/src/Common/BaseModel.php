@@ -20,7 +20,7 @@ class BaseModel extends Database
      */
     public function getAll(): array
     {
-        $sql = "SELECT * FROM $this->table";
+        $sql = "SELECT * FROM {$this->table}";
         return $this->fetchAll($sql);
     }
 
@@ -33,7 +33,7 @@ class BaseModel extends Database
      */
     public function getById(int $id, string $idField = 'id'): mixed
     {
-        $sql = "SELECT * FROM $this->table WHERE $idField = :id";
+        $sql = "SELECT * FROM {$this->table} WHERE {$idField} = :id";
         return $this->fetch($sql, ['id' => $id]);
     }
 
@@ -48,7 +48,7 @@ class BaseModel extends Database
         $data = $this->filterData($data);
         $columns = implode(", ", array_keys($data));
         $placeholders = ":" . implode(", :", array_keys($data));
-        $sql = "INSERT INTO $this->table ($columns) VALUES ($placeholders)";
+        $sql = "INSERT INTO {$this->table} ({$columns}) VALUES ({$placeholders})";
         $this->execute($sql, $data);
         return $this->lastInsertId();
     }
@@ -66,11 +66,11 @@ class BaseModel extends Database
         $data = $this->filterData($data);
         $fields = "";
         foreach ($data as $key => $value) {
-            $fields .= "$key = :$key, ";
+            $fields .= "{$key} = :{$key}, ";
         }
         $fields = rtrim($fields, ", ");
         $data['id'] = $id;
-        $sql = "UPDATE $this->table SET $fields WHERE $idField = :id";
+        $sql = "UPDATE {$this->table} SET {$fields} WHERE {$idField} = :id";
         return $this->execute($sql, $data);
     }
 
@@ -83,7 +83,7 @@ class BaseModel extends Database
      */
     public function delete(int $id, string $idField = 'id'): bool
     {
-        $sql = "DELETE FROM $this->table WHERE $idField = :id";
+        $sql = "DELETE FROM {$this->table} WHERE {$idField} = :id";
         return $this->execute($sql, ['id' => $id]);
     }
 
@@ -94,7 +94,7 @@ class BaseModel extends Database
      */
     public function count(): int
     {
-        $sql = "SELECT COUNT(*) as count FROM $this->table";
+        $sql = "SELECT COUNT(*) as count FROM {$this->table}";
         return (int)$this->fetch($sql)['count'];
     }
 
@@ -108,7 +108,7 @@ class BaseModel extends Database
     public function paginate(int $page = 1, int $limit = 10): array
     {
         $offset = ($page - 1) * $limit;
-        $sql = "SELECT * FROM $this->table LIMIT :limit OFFSET :offset";
+        $sql = "SELECT * FROM {$this->table} LIMIT :limit OFFSET :offset";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
         $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
@@ -125,7 +125,7 @@ class BaseModel extends Database
      */
     public function search(array $conditions = [], string $logic = 'AND'): array
     {
-        $sql = "SELECT * FROM $this->table";
+        $sql = "SELECT * FROM {$this->table}";
         if (!empty($conditions)) {
             $clauses = [];
             $params = [];
@@ -148,7 +148,9 @@ class BaseModel extends Database
     {
         return array_filter(
             $data,
-            fn($key) => in_array($key, $this->fillable),
+            function ($key) {
+                return in_array($key, $this->fillable);
+            },
             ARRAY_FILTER_USE_KEY
         );
     }

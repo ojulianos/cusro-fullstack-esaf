@@ -24,12 +24,12 @@ class SendMail {
         try {
             // Configurações do servidor de e-mail
             $this->mailer->isSMTP();
-            $this->mailer->Host = 'smtp.example.com'; // Substitua pelo servidor SMTP
+            $this->mailer->Host = MAIL_HOST; // Substitua pelo servidor SMTP
             $this->mailer->SMTPAuth = true;
-            $this->mailer->Username = 'your-email@example.com'; // Substitua pelo e-mail
-            $this->mailer->Password = 'your-email-password'; // Substitua pela senha
+            $this->mailer->Username = MAIL_USER; // Substitua pelo e-mail
+            $this->mailer->Password = MAIL_PASSWORD; // Substitua pela senha
             $this->mailer->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // Habilita TLS
-            $this->mailer->Port = 587; // Porta TCP para TLS
+            $this->mailer->Port = MAIL_PORT; // Porta TCP para TLS
         } catch (PHPMailerException $e) {
             throw new \Exception("Não foi possível configurar o PHPMailer: " . $e->getMessage());
         }
@@ -102,6 +102,20 @@ class SendMail {
         $html .= '</tbody></table>';
 
         return $html;
+    }
+
+    /**
+     * Adiciona um anexo ao e-mail.
+     *
+     * @param string $filePath Caminho para o arquivo a ser anexado
+     * @param string|null $name Nome do arquivo como aparecerá no e-mail (opcional)
+     */
+    public function addAttachment(string $filePath, ?string $name = null) {
+        if (file_exists($filePath)) {
+            $this->mailer->addAttachment($filePath, $name);
+        } else {
+            throw new \Exception("Arquivo para anexar não encontrado: " . $filePath);
+        }
     }
 
     /**

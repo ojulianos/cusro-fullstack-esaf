@@ -13,10 +13,11 @@ use PDOStatement;
  */
 class Database
 {
-    private string $host = 'localhost';
-    private string $db = 'seu_banco_de_dados';
-    private string $user = 'seu_usuario';
-    private string $pass = 'sua_senha';
+    private string $host = DB_HOST;
+    private string $port = DB_PORT;
+    private string $db = DB_DATABASE;
+    private string $user = DB_USER;
+    private string $pass = DB_PASSWORD;
     private string $charset = 'utf8mb4';
     protected PDO $pdo;
 
@@ -26,7 +27,7 @@ class Database
      */
     public function __construct()
     {
-        $dsn = "mysql:host=$this->host;dbname=$this->db;charset=$this->charset";
+        $dsn = "mysql:host={$this->host};port={$this->port};dbname={$this->db};charset={$this->charset}";
         $options = [
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
@@ -145,4 +146,26 @@ class Database
     {
         return $this->pdo->rollBack();
     }
+
+    /**
+     * Executa uma consulta SQL que pode ser qualquer comando.
+     * 
+     * @param string $sql A consulta SQL ou comando a ser executado.
+     * @param array $params Os parâmetros a serem associados (opcional).
+     * @return mixed O resultado da consulta, ou o número de linhas afetadas para comandos de modificação.
+     */
+    public function executeQuery(string $sql, array $params = []): mixed
+    {
+        $stmt = $this->pdo->prepare($sql);
+        $this->bindParams($stmt, $params);
+        $stmt->execute();
+
+        // Retorna o número de linhas afetadas para comandos de modificação ou o resultado para SELECT
+        if (stripos($sql, 'select') === 0) {
+            return $stmt->fetchAll();
+        } else {
+            return $stmt->rowCount();
+        }
+    }
+    
 }

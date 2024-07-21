@@ -3,6 +3,7 @@
 namespace Sys\Bi\Controllers;
 
 use Exception;
+use Sys\Bi\Common\BaseController;
 use Throwable;
 
 class Afazeres extends BaseController {
